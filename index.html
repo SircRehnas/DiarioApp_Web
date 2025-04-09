@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Diario Personal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="book">
+            <div class="header">
+                <div class="title-container">
+                    <input type="text" class="title" value="Mi Diario Personal" id="diaryTitle">
+                </div>
+                <div class="datetime">
+                    <div id="currentDateTime"></div>
+                    <div id="currentUTCDateTime"></div>
+                </div>
+            </div>
+
+            <div class="tabs">
+                <div class="tab active" data-tab="calendar">Calendario</div>
+                <div class="tab" data-tab="blogs">Blogs</div>
+                <div class="tab" data-tab="sections">Secciones</div>
+            </div>
+
+            <!-- Contenido del Calendario -->
+            <div class="tab-content active" id="calendar-content">
+                <div class="calendar-header">
+                    <div class="calendar-title">
+                        <span id="current-month-year"></span>
+                        <input type="month" id="month-picker" style="margin-left: 10px; border: none; background: transparent; font-size: inherit; font-family: inherit; color: inherit; cursor: pointer;">
+                    </div>
+                    <div class="calendar-nav">
+                        <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
+                        <button id="today">Hoy</button>
+                        <button id="next-month"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+                <div class="calendar-grid" id="days-header">
+                    <div class="calendar-day-header">Dom</div>
+                    <div class="calendar-day-header">Lun</div>
+                    <div class="calendar-day-header">Mar</div>
+                    <div class="calendar-day-header">Mié</div>
+                    <div class="calendar-day-header">Jue</div>
+                    <div class="calendar-day-header">Vie</div>
+                    <div class="calendar-day-header">Sáb</div>
+                </div>
+                <div class="calendar-grid" id="calendar-days"></div>
+            </div>
+
+            <!-- Contenido de Blogs -->
+            <div class="tab-content" id="blogs-content">
+                <div class="blogs-actions">
+                    <button class="add-blog-btn" id="add-blog">
+                        <i class="fas fa-plus"></i> Nuevo Blog
+                    </button>
+                    <div class="import-export-buttons">
+                        <button class="btn-export" id="export-data">
+                            <i class="fas fa-file-export"></i> Exportar
+                        </button>
+                        <button class="btn-import" id="import-data">
+                            <i class="fas fa-file-import"></i> Importar
+                        </button>
+                        <input type="file" id="import-file" accept=".json" style="display: none;">
+                    </div>
+                </div>
+                <div class="blogs-container" id="blogs-container">
+                    <!-- Los blogs se agregarán dinámicamente aquí -->
+                </div>
+            </div>
+
+            <!-- Contenido de Secciones -->
+            <div class="tab-content" id="sections-content">
+                <div class="sections-actions">
+                    <button class="add-section-btn" id="add-section">
+                        <i class="fas fa-plus"></i> Nueva Sección
+                    </button>
+                </div>
+                <div class="sections-container" id="sections-container">
+                    <!-- Las secciones se agregarán dinámicamente aquí -->
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Diario Personal &copy; <span id="current-year"></span> - Diseñado con ❤️ por <a href="https://github.com/SircRehnas" target="_blank">thiandev</a></p>
+            <p><a href="https://github.com/SircRehnas/DiarioApp_Web" target="_blank">GitHub del proyecto</a></p>
+        </div>
+    </div>
+
+    <!-- Modal para añadir/editar blogs -->
+    <div class="modal" id="blog-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">Nuevo Blog</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="blog-form">
+                <div class="form-group">
+                    <label for="blog-title" class="form-label">Título</label>
+                    <input type="text" id="blog-title" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Formato</label>
+                    <div class="toolbar">
+                        <button type="button" data-command="bold" title="Negrita"><i class="fas fa-bold"></i></button>
+                        <button type="button" data-command="italic" title="Cursiva"><i class="fas fa-italic"></i></button>
+                        <button type="button" data-command="underline" title="Subrayado"><i class="fas fa-underline"></i></button>
+                        <button type="button" data-command="insertUnorderedList" title="Lista sin numerar"><i class="fas fa-list-ul"></i></button>
+                        <button type="button" data-command="insertOrderedList" title="Lista numerada"><i class="fas fa-list-ol"></i></button>
+                        <button type="button" data-command="createLink" title="Insertar enlace"><i class="fas fa-link"></i></button>
+                        <button type="button" data-command="insertImage" title="Insertar imagen"><i class="fas fa-image"></i></button>
+                        <button type="button" data-command="undo" title="Deshacer"><i class="fas fa-undo"></i></button>
+                        <button type="button" data-command="redo" title="Rehacer"><i class="fas fa-redo"></i></button>
+                    </div>
+                    <div id="blog-content" class="form-textarea" contenteditable="true"></div>
+                </div>
+                <div class="form-group">
+                    <label for="blog-bg-color" class="form-label">Color de fondo</label>
+                    <input type="color" id="blog-bg-color" class="form-input" value="#ffffff">
+                </div>
+                <div class="form-group">
+                    <label for="blog-section" class="form-label">Sección</label>
+                    <select id="blog-section" class="form-input">
+                        <option value="">Sin sección</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para eventos del calendario -->
+    <div class="modal" id="event-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="event-modal-title">Nuevo Evento</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="event-form">
+                <input type="hidden" id="event-date">
+                <input type="hidden" id="event-id">
+                <div class="form-group">
+                    <label for="event-title" class="form-label">Título del evento</label>
+                    <input type="text" id="event-title" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-description" class="form-label">Descripción</label>
+                    <textarea id="event-description" class="form-textarea" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="event-color" class="form-label">Color</label>
+                    <input type="color" id="event-color" class="form-input" value="#0071e3">
+                </div>
+                <div class="form-group">
+                    <label for="event-section" class="form-label">Sección</label>
+                    <select id="event-section" class="form-input">
+                        <option value="">Sin sección</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="delete-event" style="display: none; margin-right: auto;">Eliminar</button>
+                    <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para secciones -->
+    <div class="modal" id="section-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="section-modal-title">Nueva Sección</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="section-form">
+                <input type="hidden" id="section-id">
+                <div class="form-group">
+                    <label for="section-name" class="form-label">Nombre de la sección</label>
+                    <input type="text" id="section-name" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="section-color" class="form-label">Color</label>
+                    <input type="color" id="section-color" class="form-input" value="#0071e3">
+                </div>
+                <div class="form-group">
+                    <label for="section-description" class="form-label">Descripción</label>
+                    <textarea id="section-description" class="form-textarea" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="delete-section" style="display: none; margin-right: auto;">Eliminar</button>
+                    <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para post-it -->
+    <div class="modal" id="postit-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Anclar Post-it</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="postit-form">
+                <input type="hidden" id="postit-id">
+                <div class="form-group">
+                    <label class="form-label">Anclar a:</label>
+                    <div class="postit-options">
+                        <div class="postit-option">
+                            <input type="radio" id="postit-none" name="postit-anchor" value="none" checked>
+                            <label for="postit-none">Ninguno (libre)</label>
+                        </div>
+                        <div class="postit-option">
+                            <input type="radio" id="postit-blog" name="postit-anchor" value="blog">
+                            <label for="postit-blog">Blog:</label>
+                            <select id="postit-blog-select" disabled>
+                                <option value="">Seleccionar blog</option>
+                            </select>
+                        </div>
+                        <div class="postit-option">
+                            <input type="radio" id="postit-event" name="postit-anchor" value="event">
+                            <label for="postit-event">Evento:</label>
+                            <select id="postit-event-select" disabled>
+                                <option value="">Seleccionar evento</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Botón para añadir post-it -->
+    <button class="add-post-it" id="add-post-it">+</button>
+
+    <script src="app.js"></script>
+</body>
+</html>
