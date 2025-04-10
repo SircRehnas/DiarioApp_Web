@@ -140,7 +140,7 @@ Queda prohibido:
 
 * [Guía Técnica](guia_tecnica.html)
 * [Manual de Usuario](manual_usuario.html)
-* [Changelog](CHANGELOG.md) (Próximamente)
+* [Changelog](CHANGELOG.md)
 
 ## 🐛 Reportar Problemas
 

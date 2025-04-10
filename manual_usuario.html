@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Usuario - Diario Personal Web</title>
+    <link rel="stylesheet" href="styles.css"> <style>
+        /* Estilos básicos para mejorar la legibilidad del manual */
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; }
+        .book { border: 1px solid #eee; padding: 20px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+        .title { text-align: center; margin-bottom: 20px; }
+        .tabs { display: flex; flex-wrap: wrap; border-bottom: 1px solid #ccc; margin-bottom: 20px; }
+        .tab { padding: 10px 15px; cursor: pointer; border: 1px solid transparent; border-bottom: none; margin-bottom: -1px; }
+        .tab.active { border-color: #ccc; border-bottom-color: white; background-color: white; font-weight: bold; }
+        .tab:hover { background-color: #f0f0f0; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .blog-card { border: 1px solid #eee; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #f9f9f9; }
+        h2 { border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 0; }
+        h3 { margin-top: 1.5em; }
+        code { background-color: #e4e4e4; padding: 2px 5px; border-radius: 3px; font-family: monospace; }
+        .user-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
+        .user-table th, .user-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .user-table th { background-color: #f2f2f2; }
+        .tip, .note, .warning { padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .tip { background-color: #e7f3fe; border-left: 5px solid #2196F3; }
+        .note { background-color: #fffbe5; border-left: 5px solid #FFC107; }
+        .warning { background-color: #ffebee; border-left: 5px solid #f44336; }
+        .final-note { text-align: center; background-color: #e8f5e9; border: 1px solid #a5d6a7; }
+        li a { text-decoration: none; color: #0071e3; }
+        li a:hover { text-decoration: underline; }
+    </style>
+    <link rel="stylesheet" href="styles.css"> </head>
+</head>
+<body>
+    <div class="book">
+        <h1 class="title">Manual de Usuario - Diario Personal Web</h1>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="intro">Introducción</div>
+            <div class="tab" data-tab="start">Primeros Pasos</div>
+            <div class="tab" data-tab="interface">Interfaz</div>
+            <div class="tab" data-tab="calendar">Calendario</div>
+            <div class="tab" data-tab="blogs">Blogs</div>
+            <div class="tab" data-tab="sections">Secciones</div>
+            <div class="tab" data-tab="bookmarks">Marcadores</div>
+            <div class="tab" data-tab="postits">Post-its</div>
+            <div class="tab" data-tab="settings">Configuración</div>
+            <div class="tab" data-tab="backup">Copias</div>
+            <div class="tab" data-tab="mobile">Móviles</div>
+            <div class="tab" data-tab="support">Soporte</div>
+        </div>
+
+        <div class="tab-content active" id="intro-content">
+            <h2>📖 Introducción</h2>
+            <div class="blog-card">
+                <p>Bienvenido/a a Diario Personal, tu aplicación web todo en uno para organizar tu vida digital. Gestiona tu tiempo con el calendario, expresa tus ideas en el blog, guarda enlaces importantes con los marcadores y apunta recordatorios rápidos con los post-its.</p>
+                <p>Esta guía te ayudará a sacar el máximo provecho de todas sus funcionalidades.</p>
+
+                <h3>Índice</h3>
+                 <ol>
+                    <li><a href="#" data-tablink="intro">Introducción</a></li>
+                    <li><a href="#" data-tablink="start">Primeros Pasos</a></li>
+                    <li><a href="#" data-tablink="interface">Interfaz Principal</a></li>
+                    <li><a href="#" data-tablink="calendar">Calendario y Eventos</a></li>
+                    <li><a href="#" data-tablink="blogs">Blogs (Entradas del Diario)</a></li>
+                    <li><a href="#" data-tablink="sections">Secciones</a></li>
+                    <li><a href="#" data-tablink="bookmarks">Marcadores</a></li>
+                    <li><a href="#" data-tablink="postits">Post-its</a></li>
+                    <li><a href="#" data-tablink="settings">Configuración</a></li>
+                    <li><a href="#" data-tablink="backup">Copias de Seguridad</a></li>
+                    <li><a href="#" data-tablink="mobile">Uso en Móviles</a></li>
+                    <li><a href="#" data-tablink="support">Soporte</a></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="tab-content" id="start-content">
+            <h2>🔐 Primeros Pasos</h2>
+            <div class="blog-card">
+                <h3>Acceso Inicial</h3>
+                <ol>
+                    <li>Abre el archivo `index.html` en tu navegador web preferido (Chrome, Firefox, Edge...).</li>
+                    <li>Verás la pantalla de inicio (libro cerrado). Puedes elegir iniciar sesión con Contraseña o PIN.</li>
+                    <li>Usa las credenciales predeterminadas para el primer acceso:
+                        <ul>
+                            <li>Contraseña: <code>DiarioApp</code></li>
+                            <li>PIN: <code>1234</code></li>
+                        </ul>
+                    </li>
+                    <li>**¡Importante!** Una vez dentro, ve a <strong>Configuración (⚙️) → Seguridad</strong> y cambia tanto la contraseña como el PIN por unos propios y seguros.</li>
+                </ol>
+
+                <h3>Exploración Inicial</h3>
+                <ul>
+                    <li>Navega por las pestañas principales: <strong>Calendario</strong>, <strong>Blogs</strong>, <strong>Secciones</strong>, <strong>Marcadores</strong>.</li>
+                    <li>Prueba el <strong>Botón Flotante (✚)</strong> abajo a la derecha para añadir rápidamente nuevo contenido.</li>
+                    <li>Personaliza el título de tu diario haciendo clic directamente sobre él en la parte superior.</li>
+                    <li>Explora el menú de <strong>Configuración (⚙️)</strong> para ajustar la apariencia y otras opciones.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content" id="interface-content">
+            <h2>🖥️ Interfaz Principal</h2>
+            <div class="blog-card">
+                <h3>Barra Superior</h3>
+                <ul>
+                    <li><strong>Título Editable:</strong> Haz clic en "Mi Diario Personal" (o el título que hayas puesto) para cambiarlo. Se guarda automáticamente.</li>
+                    <li><strong>Fecha y Hora:</strong> Muestra la fecha/hora local según tu zona horaria configurada, y la hora UTC. Se actualiza constantemente.</li>
+                    <li><strong>Botón de Configuración (⚙️):</strong> Abre el panel lateral con todas las opciones de personalización y gestión.</li>
+                </ul>
+
+                <h3>Navegación por Pestañas</h3>
+                <p>La navegación principal se realiza mediante pestañas:</p>
+                <ol>
+                    <li><strong>📅 Calendario:</strong> Visualiza tus eventos por mes y gestiona tu agenda.</li>
+                    <li><strong>✍️ Blogs:</strong> Crea, edita y visualiza tus entradas de diario personales.</li>
+                    <li><strong>📂 Secciones:</strong> Organiza tus blogs y eventos por categorías personalizadas.</li>
+                    <li><strong>🔖 Marcadores:</strong> Guarda y accede a tus enlaces web importantes.</li>
+                </ol>
+
+                <h3>Botón Flotante de Acciones Rápidas (FAB - ✚)</h3>
+                <p>Ubicado en la esquina inferior derecha, permite añadir nuevo contenido rápidamente:</p>
+                <ul>
+                    <li><i class="fas fa-book"></i> Nuevo Blog</li>
+                    <li><i class="fas fa-calendar-plus"></i> Nuevo Evento</li>
+                    <li><i class="fas fa-sticky-note"></i> Nuevo Post-it (flotante)</li>
+                    <li><i class="fas fa-bookmark"></i> Nuevo Marcador</li>
+                </ul>
+            </div>
+        </div>
+
+         <div class="tab-content" id="calendar-content">
+            <h2>📅 Calendario y Eventos</h2>
+            <div class="blog-card">
+                <h3>Visualización del Calendario</h3>
+                <ul>
+                    <li>Muestra una vista clásica de calendario mensual.</li>
+                    <li>Navega entre meses usando los botones <strong>◄ (Anterior)</strong> y <strong>► (Siguiente)</strong>.</li>
+                    <li>Vuelve rápidamente al mes actual con el botón <strong>Hoy</strong>.</li>
+                    <li>Selecciona un mes y año específicos usando el selector junto al nombre del mes.</li>
+                    <li>El día actual aparece resaltado.</li>
+                    <li>Los eventos creados se muestran dentro de la casilla de su día correspondiente.</li>
+                </ul>
+
+                <h3>Gestión de Eventos</h3>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Acción</th>
+                            <th>Cómo hacerlo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Crear Evento</strong></td>
+                            <td>Haz clic en el icono <strong><i class="fas fa-plus"></i></strong> que aparece al pasar el ratón sobre un día, o usa el botón "Nuevo Evento" general. Se abrirá un modal para introducir título (requerido), descripción, color y sección (opcional).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Editar Evento</strong></td>
+                            <td>Haz clic directamente sobre el nombre del evento en el calendario. Se abrirá el mismo modal con los datos cargados para modificar.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Eliminar Evento</strong></td>
+                            <td>Abre el modal de edición del evento (clic en el evento) y pulsa el botón "Eliminar" (aparece abajo a la izquierda). Se pedirá confirmación.</td>
+                        </tr>
+                         <tr>
+                            <td><strong>Mover Evento (Drag & Drop)</strong></td>
+                            <td>Haz clic sobre un evento y, sin soltar, arrástralo a otro día del calendario. Suelta el ratón sobre el día deseado para cambiar su fecha.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Asignar Color/Sección</strong></td>
+                            <td>Dentro del modal de creación/edición, utiliza el selector de color y el desplegable de sección.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p class="tip"><strong>Tip:</strong> Si un evento tiene Post-its anclados, aparecerá un pequeño icono 📝 junto a su título. Puedes pasar el ratón por encima para ver un resumen rápido de los post-its.</p>
+            </div>
+        </div>
+
+        <div class="tab-content" id="blogs-content">
+            <h2>✍️ Blogs (Entradas del Diario)</h2>
+            <div class="blog-card">
+                <h3>Crear y Editar Entradas</h3>
+                <p>Usa el botón "Nuevo Blog" o el FAB (✚ → <i class="fas fa-book"></i>) para abrir el editor.</p>
+                <h4>Editor de Texto</h4>
+                <p>Dispones de una barra de herramientas para dar formato:</p>
+                <ul>
+                    <li><strong><i class="fas fa-bold"></i> (Negrita)</strong>, <strong><i class="fas fa-italic"></i> (Cursiva)</strong>, <strong><i class="fas fa-underline"></i> (Subrayado)</strong></li>
+                    <li><strong><i class="fas fa-list-ul"></i> (Lista Viñetas)</strong>, <strong><i class="fas fa-list-ol"></i> (Lista Numerada)</strong></li>
+                    <li><strong><i class="fas fa-link"></i> (Enlace):</strong> Pide una URL para enlazar el texto seleccionado.</li>
+                    <li><strong><i class="fas fa-image"></i> (Imagen):</strong> Permite insertar una imagen desde una URL o subiendo un archivo desde tu dispositivo.</li>
+                    <li><strong><i class="fas fa-undo"></i> (Deshacer)</strong>, <strong><i class="fas fa-redo"></i> (Rehacer)</strong></li>
+                </ul>
+
+                <h4>Opciones Adicionales</h4>
+                 <ul>
+                    <li><strong>Título:</strong> Campo requerido para identificar tu entrada.</li>
+                    <li><strong>Color de fondo:</strong> Personaliza el fondo de la tarjeta de la entrada.</li>
+                    <li><strong>Sección:</strong> Asigna la entrada a una de tus secciones creadas para organizarla.</li>
+                    <li><strong>Guardar / Cancelar:</strong> Botones para confirmar o descartar los cambios.</li>
+                </ul>
+
+                <h3>Visualización y Organización</h3>
+                <ul>
+                    <li>Las entradas se muestran como tarjetas, ordenadas por fecha de modificación (más recientes primero).</li>
+                    <li>Puedes editar o eliminar una entrada usando los botones correspondientes en cada tarjeta.</li>
+                    <li>Si una entrada pertenece a una sección, se mostrará una etiqueta con el nombre y color de la sección.</li>
+                    <li>Las entradas pueden tener Post-its anclados (se indica con 📝).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content" id="sections-content">
+            <h2>📂 Secciones</h2>
+            <div class="blog-card">
+                <h3>¿Qué son las Secciones?</h3>
+                <p>Las secciones te permiten categorizar y agrupar tus entradas de blog y eventos. Puedes crear secciones como "Trabajo", "Personal", "Ideas", "Viajes", etc.</p>
+
+                <h3>Gestionar Secciones</h3>
+                <ol>
+                    <li><strong>Crear:</strong> Usa el botón "Nueva Sección". Introduce un nombre (obligatorio), un color distintivo y una descripción (opcional).</li>
+                    <li><strong>Editar:</strong> Haz clic en el botón "Editar" (<i class="fas fa-edit"></i>) en la tarjeta de la sección.</li>
+                    <li><strong>Eliminar:</strong> Haz clic en el botón "Eliminar" (<i class="fas fa-trash"></i>) en la tarjeta de la sección (se pedirá confirmación).</li>
+                </ol>
+
+                <h3>Visualizar Contenido por Sección</h3>
+                <ul>
+                    <li>Cada sección muestra cuántos blogs y eventos tiene asignados.</li>
+                    <li>Haz clic en cualquier parte de la tarjeta de una sección (excepto en los botones de acción) para **expandirla**.</li>
+                    <li>Al expandirse, verás listas separadas de los blogs y eventos pertenecientes a esa sección.</li>
+                    <li>Puedes hacer clic en los títulos de los blogs/eventos dentro de la sección expandida para verlos o editarlos directamente.</li>
+                </ul>
+                <p class="note"><strong>Nota:</strong> Al eliminar una sección, los blogs y eventos que pertenecían a ella **no se eliminan**, simplemente pierden la asignación a esa sección y aparecerán como "Sin sección".</p>
+                 <p class="tip"><strong>Tip:</strong> Usa colores diferentes para cada sección para identificarlas fácilmente en las vistas de Blogs y Calendario.</p>
+            </div>
+        </div>
+
+        <div class="tab-content" id="bookmarks-content">
+            <h2>🔖 Marcadores</h2>
+            <div class="blog-card">
+                <h3>Guardar Enlaces Web</h3>
+                 <p>La pestaña Marcadores te permite guardar y organizar enlaces web importantes.</p>
+                <ol>
+                    <li>Usa el botón "Nuevo Marcador" o el FAB (✚ → <i class="fas fa-bookmark"></i>).</li>
+                    <li>Rellena los campos en el modal:
+                        <ul>
+                            <li><strong>Título:</strong> Un nombre descriptivo para el enlace (requerido).</li>
+                            <li><strong>URL:</strong> La dirección web completa (requerido, debe ser una URL válida).</li>
+                            <li><strong>Descripción:</strong> Notas adicionales sobre el enlace (opcional).</li>
+                        </ul>
+                    </li>
+                     <li>Haz clic en "Guardar".</li>
+                </ol>
+
+                <h3>Usar Marcadores</h3>
+                <ul>
+                    <li>Los marcadores se muestran como tarjetas.</li>
+                    <li>Haz clic en la **URL** dentro de la tarjeta para abrir el enlace en una nueva pestaña de tu navegador.</li>
+                    <li>Usa los botones "Editar" (<i class="fas fa-edit"></i>) y "Eliminar" (<i class="fas fa-trash"></i>) en cada tarjeta para gestionarlos.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content" id="postits-content">
+            <h2>📝 Post-its</h2>
+             <div class="blog-card">
+                 <h3>Notas Rápidas y Flexibles</h3>
+                 <p>Los Post-its son ideales para anotaciones rápidas, recordatorios o ideas sueltas.</p>
+                <ul>
+                    <li><strong>Creación:</strong> Añade un nuevo Post-it flotante usando el FAB (✚ → <i class="fas fa-sticky-note"></i>). Aparecerá en una posición semi-aleatoria.</li>
+                    <li><strong>Modo Flotante:</strong> Por defecto, los Post-its son flotantes. Haz clic (fuera de los botones y el área de texto) y arrastra para moverlos libremente por la pantalla. Su posición se guarda.</li>
+                     <li><strong>Contenido:</strong> Escribe directamente en el área de texto del Post-it. Los cambios se guardan automáticamente unos instantes después de dejar de escribir.</li>
+                     <li><strong>Eliminación:</strong> Haz clic en el icono de la papelera (🗑️) que aparece al pasar el ratón sobre el Post-it.</li>
+                </ul>
+
+                <h3>Anclaje y Color</h3>
+                <table class="user-table">
+                    <thead>
+                        <tr>
+                            <th>Icono</th>
+                            <th>Acción</th>
+                            <th>Descripción</th>
+                        </tr>
+                     </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fas fa-thumbtack"></i> / <i class="fas fa-unlink"></i></td>
+                            <td><strong>Anclar / Desanclar</strong></td>
+                            <td>Haz clic en este icono. Se abrirá un modal para seleccionar un Blog o Evento específico al que anclar el Post-it. Si ya está anclado, el icono cambia a <i class="fas fa-unlink"></i> y al hacer clic se desanclará, volviéndose flotante.</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-palette"></i></td>
+                             <td><strong>Cambiar Color</strong></td>
+                            <td>Haz clic en este icono para desplegar una paleta de colores predefinidos. Selecciona un color de la paleta o haz clic en el último círculo (+) para abrir el selector de color del sistema y elegir un color personalizado.</td>
+                        </tr>
+                        <tr>
+                            <td>🗑️</td>
+                            <td><strong>Eliminar</strong></td>
+                            <td>Elimina permanentemente el Post-it (con confirmación).</td>
+                        </tr>
+                    </tbody>
+                </table>
+                 <p class="tip"><strong>Tip:</strong> Los Post-its anclados se mostrarán junto al Blog o Evento al que pertenecen y no serán arrastrables. Usa colores para diferenciar tus notas visualmente.</p>
+             </div>
+        </div>
+
+        <div class="tab-content" id="settings-content">
+            <h2>⚙️ Configuración</h2>
+             <div class="blog-card">
+                 <p>Accede al panel de configuración haciendo clic en el icono del engranaje (⚙️) en la esquina superior derecha.</p>
+                <h3>Opciones Disponibles</h3>
+                <h4>Apariencia</h4>
+                <ul>
+                    <li><strong>Color del libro:</strong> Elige el color de fondo principal de tu diario.</li>
+                    <li><strong>Tema:</strong> Selecciona entre el tema Claro (por defecto) o el tema Oscuro.</li>
+                    <li><strong>Zona horaria:</strong> Elige tu zona horaria para que las fechas y horas se muestren correctamente.</li>
+                    <li><strong>Idioma:</strong> Cambia entre Español (es) e Inglés (en). La interfaz se actualizará al instante.</li>
+                </ul>
+
+                <h4>Seguridad</h4>
+                <ul>
+                    <li><strong>Cambiar contraseña:</strong> Establece una nueva contraseña de acceso (requiere introducir la actual).</li>
+                    <li><strong>Cambiar PIN:</strong> Establece un nuevo PIN numérico de 4 dígitos.</li>
+                </ul>
+
+                <h4>Datos</h4>
+                <ul>
+                    <li><strong>Exportar todo:</strong> Genera y descarga un archivo `.json` con todos tus datos (ver sección "Copias de Seguridad").</li>
+                    <li><strong>Importar todo:</strong> Sube un archivo `.json` previamente exportado para restaurar tus datos (ver sección "Copias de Seguridad").</li>
+                </ul>
+                 <h4>Widgets (Futuro)</h4>
+                 <ul>
+                      <li>Permite añadir diferentes tipos de widgets (funcionalidad básica implementada, contenido de widgets pendiente).</li>
+                 </ul>
+             </div>
+        </div>
+
+        <div class="tab-content" id="backup-content">
+            <h2>💾 Copias de Seguridad (Exportar/Importar)</h2>
+             <div class="blog-card">
+                 <p>Es muy recomendable realizar copias de seguridad periódicas de tus datos, ya que se guardan únicamente en tu navegador actual.</p>
+                <h3>Exportación (Crear Copia)</h3>
+                <ol>
+                    <li>Ve a <strong>Configuración (⚙️) → Datos</strong>.</li>
+                    <li>Haz clic en el botón <strong>"Exportar todo"</strong>.</li>
+                    <li>Tu navegador descargará un archivo con un nombre similar a `diario-backup-AAAA-MM-DD.json`.</li>
+                    <li>Guarda este archivo `.json` en un lugar seguro (tu ordenador, un disco externo, la nube, etc.). Este archivo contiene toda tu información: configuración, blogs, eventos, secciones, marcadores y post-its.</li>
+                </ol>
+
+                <h3>Importación (Restaurar Copia)</h3>
+                <ol>
+                    <li>Ve a <strong>Configuración (⚙️) → Datos</strong>.</li>
+                    <li>Haz clic en el botón <strong>"Importar todo"</strong>.</li>
+                    <li>Se abrirá un explorador de archivos. Selecciona el archivo `.json` que exportaste previamente.</li>
+                    <li>Aparecerá un mensaje pidiendo confirmación, ya que la importación **borrará todos los datos que tengas actualmente en el diario**.</li>
+                    <li>Si confirmas, tus datos se restaurarán desde el archivo.</li>
+                </ol>
+                <p class="warning"><strong>¡MUY IMPORTANTE!</strong> La importación es una operación destructiva. Sobrescribe todos los datos actuales con los del archivo importado. Asegúrate de querer hacerlo antes de confirmar.</p>
+                 <p class="tip"><strong>Usos:</strong> Mover tu diario a otro navegador u ordenador, o restaurar tus datos después de limpiar la caché del navegador.</p>
+             </div>
+        </div>
+
+        <div class="tab-content" id="mobile-content">
+            <h2>📱 Uso en Móviles</h2>
+             <div class="blog-card">
+                 <p>La aplicación Diario Personal está diseñada para funcionar también en dispositivos móviles y tablets.</p>
+                <ul>
+                    <li>La interfaz se adapta a pantallas más pequeñas, reorganizando algunos elementos para mejor legibilidad y uso táctil.</li>
+                    <li>El Botón Flotante (FAB) sigue disponible para acciones rápidas.</li>
+                    <li>Todas las funcionalidades principales (calendario, blogs, secciones, marcadores, post-its, configuración) están accesibles.</li>
+                     <li>El rendimiento puede variar dependiendo de la potencia del dispositivo y la cantidad de datos almacenados.</li>
+                </ul>
+                 <p class="tip"><strong>Tip:</strong> Puedes "añadir a la pantalla de inicio" la aplicación desde tu navegador móvil para un acceso más directo, como si fuera una app nativa.</p>
+             </div>
+        </div>
+
+        <div class="tab-content" id="support-content">
+            <h2>❓ Soporte y Problemas Comunes</h2>
+             <div class="blog-card">
+                <h3>Solución de Problemas</h3>
+                <table class="user-table">
+                     <thead>
+                        <tr>
+                            <th>Problema</th>
+                            <th>Posible Solución</th>
+                        </tr>
+                     </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>He olvidado mi contraseña/PIN</strong></td>
+                            <td>No hay un método de recuperación automático. La única forma es borrar los datos de la aplicación almacenados por el navegador (buscar cómo borrar "LocalStorage" o "Datos de sitios web" para el sitio donde alojas el diario). **Esto eliminará TODO tu contenido**. Después podrás acceder con las credenciales por defecto. ¡Realiza exportaciones frecuentes para evitar esto!</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Los cambios no se guardan / La app va lenta</strong></td>
+                            <td>El navegador tiene un límite de espacio para LocalStorage (usualmente 5-10MB). Si tienes muchísimas entradas o imágenes muy grandes guardadas directamente (no por URL), podrías alcanzar el límite. Intenta exportar tus datos, borrar el LocalStorage y luego importar de nuevo. Considera alojar imágenes grandes externamente y usar URLs.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Error al importar el archivo .json</strong></td>
+                            <td>Asegúrate de que el archivo no ha sido modificado o corrupto después de exportarlo. Debe ser un archivo `.json` válido generado por la propia aplicación. Intenta exportar de nuevo si es posible.</td>
+                        </tr>
+                         <tr>
+                            <td><strong>Un botón o función no responde</strong></td>
+                            <td>Intenta recargar la página (F5 o Ctrl+R). Si persiste, puede ser un bug. Revisa la consola de desarrollador del navegador (F12) por si hay errores y repórtalos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Contacto y Reporte de Errores</h3>
+                <p>Si encuentras un error o tienes alguna sugerencia:</p>
+                <ul>
+                    <li>Preferiblemente: <a href="https://github.com/SircRehnas/DiarioApp_Web/issues" target="_blank" rel="noopener noreferrer">Abre un "Issue" en el repositorio de GitHub del proyecto</a>. Describe el problema detalladamente, incluyendo los pasos para reproducirlo y capturas de pantalla si es posible.</li>
+                    <li>Puedes contactar al desarrollador directamente en GitHub: @SircRehnas</li>
+                </ul>
+             </div>
+
+             <div class="blog-card final-note">
+                <p><strong>¡Gracias por usar Diario Personal Web! Esperamos que te sea de gran utilidad.</strong></p>
+             </div>
+        </div>
+    </div>
+
+    <script>
+        // Script simple para manejar las pestañas del manual
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        const tabLinks = document.querySelectorAll('a[data-tablink]');
+
+        function setActiveTab(tabId) {
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+
+            const activeTab = document.querySelector(`.tab[data-tab="${tabId}"]`);
+            const activeContent = document.getElementById(`${tabId}-content`);
+
+            if (activeTab) activeTab.classList.add('active');
+            if (activeContent) activeContent.classList.add('active');
+        }
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                setActiveTab(tabId);
+            });
+        });
+
+         tabLinks.forEach(link => {
+             link.addEventListener('click', (e) => {
+                 e.preventDefault(); // Evitar comportamiento de ancla
+                 const tabId = link.getAttribute('data-tablink');
+                 setActiveTab(tabId);
+                 // Opcional: Scroll suave hacia el contenido
+                 const activeContent = document.getElementById(`${tabId}-content`);
+                 if (activeContent) {
+                     activeContent.scrollIntoView({ behavior: 'smooth' });
+                 }
+             });
+         });
+
+         // Activar pestaña inicial (por si acaso)
+         setActiveTab('intro');
+    </script>
+</body>
+</html>
