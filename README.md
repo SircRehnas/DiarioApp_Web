@@ -39,7 +39,7 @@ Diario Personal es una aplicación web completa para organizar tu vida personal 
 
 1.  **Versión local**:
     ```bash
-    git clone [https://github.com/SircRehnas/DiarioApp_Web.git](https://github.com/SircRehnas/DiarioApp_Web.git)
+    git clone https://github.com/SircRehnas/DiarioApp_Web.git
     cd DiarioApp_Web
 
     # Abre el archivo index.html en tu navegador web preferido
