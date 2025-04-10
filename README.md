@@ -138,8 +138,9 @@ Queda prohibido:
 
 ## 📚 Documentación Adicional
 
-* Guía Técnica (Próximamente)
-* [Manual de Usuario](README-ManualUsuario.md) * Changelog (Registro de cambios) (Próximamente)
+* [Guía Técnica](guia_tecnica.html)
+* [Manual de Usuario](manual_usuario.html)
+* [Changelog](CHANGELOG.md) (Próximamente)
 
 ## 🐛 Reportar Problemas
 
