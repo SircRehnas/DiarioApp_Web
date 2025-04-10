@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía Técnica - Diario Personal Web</title>
+    <link rel="stylesheet" href="styles.css"> </head>
+    <style>
+        /* Estilos básicos para mejorar la legibilidad de la guía */
+        body { font-family: sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; }
+        .book { border: 1px solid #eee; padding: 20px; box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+        .title { text-align: center; margin-bottom: 20px; }
+        .tabs { display: flex; flex-wrap: wrap; border-bottom: 1px solid #ccc; margin-bottom: 20px; }
+        .tab { padding: 10px 15px; cursor: pointer; border: 1px solid transparent; border-bottom: none; margin-bottom: -1px; }
+        .tab.active { border-color: #ccc; border-bottom-color: white; background-color: white; font-weight: bold; }
+        .tab:hover { background-color: #f0f0f0; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .blog-card, .section-card, .bookmark-card { border: 1px solid #eee; padding: 15px; margin-bottom: 15px; border-radius: 5px; background-color: #f9f9f9; }
+        h2 { border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 0; }
+        h3 { margin-top: 1.5em; }
+        pre code { display: block; background-color: #e4e4e4; padding: 10px; border-radius: 3px; font-family: monospace; white-space: pre-wrap; word-break: break-all; }
+        .bookmarks-container { display: flex; flex-wrap: wrap; gap: 15px; }
+        .bookmark-card { flex: 1 1 200px; } /* Permitir que las tarjetas fluyan */
+    </style>
+</head>
+<body>
+    <div class="book">
+        <h1 class="title">Guía Técnica - Diario Personal Web</h1>
+
+        <div class="tabs">
+            <div class="tab active" data-tab="overview">Visión General</div>
+            <div class="tab" data-tab="structure">Estructura</div>
+            <div class="tab" data-tab="api">APIs y Datos</div>
+            <div class="tab" data-tab="css">CSS y Diseño</div>
+            <div class="tab" data-tab="installation">Instalación</div>
+        </div>
+
+        <div class="tab-content active" id="overview-content">
+            <h2>📚 Visión General</h2>
+            <div class="blog-card">
+                <h3>Arquitectura</h3>
+                <p>Diario Personal es una Aplicación de Página Única (SPA) puramente del lado del cliente. No requiere backend.</p>
+                <ul>
+                    <li><strong>Estructura:</strong> HTML5 semántico.</li>
+                    <li><strong>Estilos:</strong> CSS3 moderno, utilizando variables CSS (custom properties) para tematización y consistencia.</li>
+                    <li><strong>Lógica:</strong> JavaScript (ES6+) vanilla, sin frameworks externos. Orientado a eventos y manipulación del DOM.</li>
+                    <li><strong>Persistencia:</strong> API `localStorage` del navegador para guardar todos los datos del usuario.</li>
+                </ul>
+            </div>
+
+            <div class="blog-card">
+                <h3>Flujo de Datos Principal</h3>
+                <p>El flujo de datos sigue un patrón simple basado en eventos y renderizado:</p>
+                <pre><code>Usuario Interactúa (UI Event) → Event Listener (JS) → Actualiza Modelo de Datos (Arrays/Objetos JS) → Guarda en LocalStorage (JSON.stringify) → Re-Renderiza UI (Actualiza DOM)</code></pre>
+                <p>Los datos se cargan desde `localStorage` al iniciar la aplicación.</p>
+            </div>
+            <div class="blog-card">
+                <h3>🛠️ Tecnologías Utilizadas</h3>
+                <ul>
+                    <li><strong>Lenguajes Base:</strong> HTML5, CSS3, JavaScript (ES6+)</li>
+                    <li><strong>Iconos:</strong> Font Awesome 6 (CDN)</li>
+                    <li><strong>Fuentes:</strong> Google Fonts (Playfair Display, Roboto) (CDN)</li>
+                    <li><strong>Almacenamiento Cliente:</strong> Web Storage API (`localStorage`)</li>
+                    <li><strong>APIs Navegador:</strong> DOM API, Intl API (fechas/horas), Drag and Drop API, File API (importar/exportar), ContentEditable API.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content" id="structure-content">
+            <h2>🏗️ Estructura del Proyecto</h2>
+             <div class="section-card">
+                <h3>Organización de Archivos</h3>
+                <pre><code>diario-app/
+├── index.html          # Estructura HTML principal y punto de entrada
+├── styles.css          # Hoja de estilos principal
+├── app.js              # Toda la lógica JavaScript de la aplicación
+└── docs/               # (Opcional) Carpeta para documentación
+    ├── manual_usuario.html
+    └── guia_tecnica.html
+</code></pre>
+                <p>La simplicidad es clave: solo se necesitan 3 archivos principales para ejecutar la aplicación.</p>
+            </div>
+
+            <div class="section-card">
+                <h3>Componentes Conceptuales en `app.js`</h3>
+                <p>Aunque es JavaScript vanilla, la lógica en `app.js` se puede agrupar conceptualmente:</p>
+                <ul>
+                    <li><strong>Inicialización (`init`, `loadSettings`):</strong> Carga de datos, configuración inicial de listeners y UI.</li>
+                    <li><strong>Autenticación (`showLoginScreen`, `showApp`, listeners de login/pin):</strong> Manejo del acceso.</li>
+                    <li><strong>Gestión de Estado (variables globales):</strong> Arrays (`blogs`, `events`, etc.) y objeto `settings`.</li>
+                    <li><strong>Renderizado (funciones `renderCalendar`, `renderBlogs`, etc.):</strong> Actualización dinámica del DOM basada en el estado.</li>
+                    <li><strong>Manejo de Eventos (`setupEventListeners`, funciones `handle...`):</strong> Respuesta a la interacción del usuario.</li>
+                    <li><strong>Lógica de Negocio (funciones `saveBlog`, `deleteEvent`, `anchorPostIt`, etc.):</strong> Manipulación de los datos.</li>
+                    <li><strong>Utilidades (`generateId`, `isValidUrl`, `openModal`, `closeModal`, `showNotification`):</strong> Funciones de ayuda reutilizables.</li>
+                    <li><strong>Persistencia (funciones `saveAllData`, `saveBlogs`, etc.):</strong> Interacción con `localStorage`.</li>
+                     <li><strong>Importación/Exportación (`importAllData`, `exportAllData`):</strong> Manejo de archivos JSON.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content" id="api-content">
+            <h2>🔌 APIs del Navegador Utilizadas</h2>
+            <div class="bookmarks-container">
+                <div class="bookmark-card">
+                    <h3>Web Storage (`localStorage`)</h3>
+                    <p>Para guardar/leer datos complejos:</p>
+                    <pre><code>// Guardar
+localStorage.setItem('clave', JSON.stringify(objetoOArray));
+// Leer
+const datos = JSON.parse(localStorage.getItem('clave')) || valorPorDefecto;</code></pre>
+                </div>
+
+                <div class="bookmark-card">
+                    <h3>Drag & Drop API (Eventos Calendario)</h3>
+                     <p>Para mover eventos entre días:</p>
+                    <pre><code>// En el elemento arrastrable (evento)
+elemento.draggable = true;
+elemento.addEventListener('dragstart', (e) => {
+  e.dataTransfer.setData('text/plain', eventId);
+  e.dataTransfer.effectAllowed = 'move';
+});
+// En el contenedor de destino (días del calendario)
+contenedor.addEventListener('dragover', (e) => e.preventDefault());
+contenedor.addEventListener('drop', (e) => {
+  e.preventDefault();
+  const eventId = e.dataTransfer.getData('text/plain');
+  const diaDestino = e.target.closest('.calendar-day');
+  // ... lógica para actualizar fecha y re-renderizar
+});</code></pre>
+                    <p>(Una implementación similar se usa para Post-its flotantes con `mousedown`, `mousemove`, `mouseup`).</p>
+                </div>
+
+                <div class="bookmark-card">
+                    <h3>Intl API (Internacionalización)</h3>
+                    <p>Para formatear fechas y horas:</p>
+                    <pre><code>const options = { /* ... */ timeZone: settings.timezone };
+new Date().toLocaleDateString(settings.language, options);
+// Usado también en el selector de Zona Horaria
+Intl.DateTimeFormat().resolvedOptions().timeZone; // Obtener zona por defecto</code></pre>
+                </div>
+
+                <div class="bookmark-card">
+                    <h3>ContentEditable API</h3>
+                    <p>Para el editor de blogs:</p>
+                    <pre><code>&lt;div id="blog-content" contenteditable="true"&gt;&lt;/div&gt;
+// Comandos JS:
+document.execCommand('bold', false, null);
+document.execCommand('createLink', false, url);
+document.execCommand('insertImage', false, imageUrl);</code></pre>
+                </div>
+                 <div class="bookmark-card">
+                    <h3>File API & Object URLs</h3>
+                     <p>Para importar/exportar archivos:</p>
+                    <pre><code>// Exportar
+const blob = new Blob([jsonString], {type: 'application/json'});
+const url = URL.createObjectURL(blob);
+link.href = url;
+link.download = 'backup.json';
+link.click();
+URL.revokeObjectURL(url);
+
+// Importar
+const reader = new FileReader();
+reader.onload = (e) => { JSON.parse(e.target.result); };
+reader.readAsText(fileInputElement.files[0]);</code></pre>
+                </div>
+            </div>
+
+            <h2>📦 Modelo de Datos (`localStorage`)</h2>
+            <p>Los datos se almacenan como strings JSON en `localStorage`. La estructura general es:</p>
+            <div class="blog-card">
+                 <pre><code>{
+  "settings": {
+    "bookColor": "#f8f4e8",
+    "theme": "light",
+    "timezone": "Europe/Madrid",
+    "language": "es",
+    "password": "DiarioApp", // O la contraseña cambiada por el usuario
+    "pin": "1234"         // O el PIN cambiado
+  },
+  "blogs": [
+    {
+      "id": "...",
+      "title": "Título Entrada",
+      "content": "<p>Contenido HTML</p>",
+      "bgColor": "#ffffff",
+      "sectionId": "sec1" | null,
+      "date": "ISOStringFechaHora" // Fecha creación/última modificación
+    }
+    // ... más blogs
+  ],
+  "events": [
+    {
+      "id": "...",
+      "title": "Título Evento",
+      "description": "Descripción opcional",
+      "color": "#0071e3",
+      "date": "ISOStringFechaHora", // Fecha/Hora del evento
+      "sectionId": "sec1" | null
+    }
+    // ... más eventos
+  ],
+  "sections": [
+    {
+      "id": "sec1",
+      "name": "Nombre Sección",
+      "color": "#ff0000",
+      "description": "Descripción opcional"
+    }
+    // ... más secciones
+  ],
+  "bookmarks": [
+    {
+      "id": "...",
+      "title": "Título Marcador",
+      "url": "https://ejemplo.com",
+      "description": "Descripción opcional"
+    }
+    // ... más marcadores
+  ],
+  "postIts": [
+    {
+      "id": "...",
+      "content": "Contenido del post-it",
+      "color": "#fffd75",
+      "position": { "x": 150, "y": 250 }, // Posición si es flotante
+      "anchorType": "blog" | "event" | null, // Tipo de anclaje
+      "anchorId": "idDelBlogOEvento" | null // ID del elemento anclado
+    }
+    // ... más post-its
+  ],
+  "widgets": [
+     {
+       "id": "...",
+       "type": "weather" | "rss" | "bookmark",
+       "settings": {} // Configuraciones específicas del widget
+     }
+     // ... más widgets
+  ],
+  "diaryTitle": "Título del Diario Editado" // Guardado separadamente
+}</code></pre>
+            </div>
+        </div>
+
+        <div class="tab-content" id="css-content">
+            <h2>🎨 CSS y Sistema de Diseño</h2>
+             <div class="blog-card">
+                 <h3>Variables CSS (Custom Properties)</h3>
+                 <p>Se utiliza un sistema de variables CSS definido en `:root` para gestionar colores, transiciones, sombras, etc., facilitando la tematización y el mantenimiento.</p>
+                <pre><code>/* En styles.css */
+:root {
+    /* Paleta Base (Tema Claro) */
+    --primary-color: #333;
+    --secondary-color: #555;
+    --accent-color: #0071e3;
+    --light-gray: #f5f5f7;
+    --book-color: #f8f4e8;
+    --book-shadow: #d9d5c5;
+    --text-color: #212529;
+    /* ... otras variables ... */
+
+    /* Valores Comunes */
+    --transition: all 0.3s ease;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    /* Sobrescritura para Tema Oscuro */
+    --primary-color: #f8f9fa;
+    --secondary-color: #adb5bd;
+    --light-gray: #343a40;
+    --book-color: #495057;
+    --book-shadow: #212529;
+    --text-color: #f8f9fa;
+    /* ... otras sobrescrituras ... */
+    --shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+}</code></pre>
+                <p>El cambio de tema se realiza cambiando el atributo `data-theme` en el elemento `<html>` vía JavaScript.</p>
+            </div>
+
+            <h3>Componentes CSS Clave</h3>
+            <div class="bookmarks-container">
+                <div class="bookmark-card">
+                    <h4>Efecto Libro 3D (Login)</h4>
+                    <pre><code>.closed-book {
+    /* ... */
+    transform-style: preserve-3d;
+    transform: perspective(1000px) rotateY(0deg);
+    transition: transform 1s ease;
+}
+.closed-book.open {
+    transform: perspective(1000px) rotateY(-180deg);
+}</code></pre>
+                </div>
+                 <div class="bookmark-card">
+                    <h4>Botón Flotante (FAB)</h4>
+                    <pre><code>.fab-options {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: var(--transition);
+    pointer-events: none;
+}
+/* Clase .show añadida vía JS para mostrar */
+.fab-options.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}</code></pre>
+                </div>
+                <div class="bookmark-card">
+                    <h4>Sistema de Notificaciones</h4>
+                     <p>Animación de entrada y salida automática.</p>
+                    <pre><code>.notification {
+    position: fixed; /* ... */
+    animation:
+        slideInNotification 0.3s ease,
+        fadeOutNotification 0.3s ease 2.7s forwards;
+}
+@keyframes slideInNotification { /* ... */ }
+@keyframes fadeOutNotification { /* ... */ }</code></pre>
+                </div>
+                 <div class="bookmark-card">
+                    <h4>Responsividad</h4>
+                     <p>Uso de Media Queries para adaptar layout.</p>
+                    <pre><code>/* Ejemplo para tablets/móviles */
+@media (max-width: 768px) {
+    .header { flex-direction: column; }
+    .calendar-grid { gap: 5px; }
+    /* ... otras adaptaciones ... */
+}</code></pre>
+                </div>
+            </div>
+
+            <h2>📐 Principios de Diseño Aplicados</h2>
+            <div class="blog-card">
+                <ul>
+                    <li><strong>Consistencia:</strong> Uso de variables CSS y clases reutilizables para mantener un aspecto uniforme. Transiciones suaves (`var(--transition)`) aplicadas a la mayoría de las interacciones.</li>
+                    <li><strong>Jerarquía Visual:</strong> Uso de tamaño de fuente, peso, color y sombras (`var(--shadow)`) para guiar la atención del usuario.</li>
+                    <li><strong>Feedback Interactivo:</strong> Efectos `hover` claros, animaciones en botones y modales, notificaciones para confirmar acciones.</li>
+                    <li><strong>Minimalismo:</strong> Diseño limpio, evitando elementos superfluos, inspirado en interfaces modernas.</li>
+                     <li><strong>Accesibilidad (Básica):</strong> Buen contraste de color en ambos temas (claro/oscuro), tamaños de fuente legibles. (Se podría mejorar con atributos ARIA).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="tab-content" id="installation-content">
+            <h2>🚀 Instalación y Ejecución</h2>
+            <div class="blog-card">
+                 <h3>Requisitos</h3>
+                 <ul>
+                     <li>Un navegador web moderno (Chrome, Firefox, Edge, Safari...).</li>
+                     <li>No se requiere servidor web ni dependencias externas (excepto las fuentes y iconos cargados por CDN).</li>
+                 </ul>
+                <h3>Pasos</h3>
+                <ol>
+                    <li>Descarga los 3 archivos (`index.html`, `styles.css`, `app.js`) o clona el repositorio:
+                        <pre><code>git clone https://github.com/SircRehnas/DiarioApp_Web.git</code></pre>
+                        (Asegúrate de estar en la rama correcta si hay varias).
+                    </li>
+                    <li>Coloca los 3 archivos en la misma carpeta en tu ordenador.</li>
+                    <li>Abre el archivo `index.html` directamente con tu navegador web (doble clic o "Abrir con...").</li>
+                </ol>
+                 <h3>Despliegue (Opcional)</h3>
+                 <p>Al ser archivos estáticos, puedes desplegar la aplicación fácilmente en:</p>
+                 <ul>
+                     <li><strong>GitHub Pages:</strong> Gratuito para repositorios públicos/privados.</li>
+                     <li><strong>Netlify, Vercel, Cloudflare Pages:</strong> Plataformas de hosting para sitios estáticos.</li>
+                     <li>Cualquier servidor web simple (Apache, Nginx) que pueda servir archivos estáticos.</li>
+                 </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Script simple para manejar las pestañas de la guía
+        const tabsTech = document.querySelectorAll('.tab'); // Usar nueva variable
+        const tabContentsTech = document.querySelectorAll('.tab-content'); // Usar nueva variable
+
+        function setActiveTabTech(tabId) {
+            tabsTech.forEach(t => t.classList.remove('active'));
+            tabContentsTech.forEach(c => c.classList.remove('active'));
+
+            const activeTab = document.querySelector(`.tab[data-tab="${tabId}"]`);
+            const activeContent = document.getElementById(`${tabId}-content`);
+
+            if (activeTab) activeTab.classList.add('active');
+            if (activeContent) activeContent.classList.add('active');
+        }
+
+        tabsTech.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabId = tab.getAttribute('data-tab');
+                setActiveTabTech(tabId);
+            });
+        });
+
+         // Activar pestaña inicial
+         setActiveTabTech('overview');
+    </script>
+</body>
+</html>

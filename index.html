@@ -9,8 +9,157 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="app-container">
-        <div class="book">
+    <!-- Pantalla de inicio/login -->
+    <div class="login-screen" id="login-screen">
+        <div class="closed-book">
+            <div class="book-cover">
+                <h1>Mi Diario</h1>
+                <div class="login-options">
+                    <button id="show-password-login">Contraseña</button>
+                    <button id="show-pin-login">PIN</button>
+                </div>
+                <form id="password-form" class="login-form">
+                    <input type="password" id="password-input" placeholder="Contraseña" required>
+                    <button type="submit">Abrir</button>
+                </form>
+                <div id="pin-pad" class="login-form" style="display: none;">
+                    <div class="pin-display" id="pin-display">____</div>
+                    <div class="pin-numbers">
+                        <button type="button" data-number="1">1</button>
+                        <button type="button" data-number="2">2</button>
+                        <button type="button" data-number="3">3</button>
+                        <button type="button" data-number="4">4</button>
+                        <button type="button" data-number="5">5</button>
+                        <button type="button" data-number="6">6</button>
+                        <button type="button" data-number="7">7</button>
+                        <button type="button" data-number="8">8</button>
+                        <button type="button" data-number="9">9</button>
+                        <button type="button" id="pin-clear">C</button>
+                        <button type="button" data-number="0">0</button>
+                        <button type="button" id="pin-submit">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Aplicación principal (oculta inicialmente) -->
+    <div class="app-container" id="app-container" style="display: none;">
+        <!-- Botón de configuración -->
+        <button class="settings-btn" id="settings-btn">
+            <i class="fas fa-cog"></i>
+        </button>
+
+        <!-- Menú de configuración -->
+        <div class="settings-menu" id="settings-menu">
+            <div class="settings-header">
+                <h3>Configuración</h3>
+                <button class="close-settings">&times;</button>
+            </div>
+            <div class="settings-content">
+                <div class="settings-group">
+                    <h4>Apariencia</h4>
+                    <div class="form-group">
+                        <label for="book-bg-color">Color del libro</label>
+                        <input type="color" id="book-bg-color" value="#f8f4e8">
+                    </div>
+                    <div class="form-group">
+                        <label for="theme-select">Tema</label>
+                        <select id="theme-select">
+                            <option value="light">Claro</option>
+                            <option value="dark">Oscuro</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="settings-group">
+                    <h4>Zona horaria</h4>
+                    <select id="timezone-select">
+                        <!-- Opciones se llenarán dinámicamente -->
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <h4>Idioma</h4>
+                    <select id="language-select">
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="settings-group">
+                    <h4>Seguridad</h4>
+                    <button id="change-password">Cambiar contraseña</button>
+                    <button id="change-pin">Cambiar PIN</button>
+                </div>
+                <div class="settings-group">
+                    <h4>Datos</h4>
+                    <button id="export-settings">Exportar todo</button>
+                    <button id="import-settings">Importar todo</button>
+                    <input type="file" id="import-file" accept=".json" style="display: none;">
+                </div>
+                <div class="settings-group">
+                    <h4>Widgets</h4>
+                    <div class="widgets-container" id="widgets-container">
+                        <!-- Widgets se agregarán aquí -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para cambiar contraseña/PIN -->
+        <div class="modal" id="security-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="security-modal-title">Cambiar contraseña</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <form id="security-form">
+                    <div id="current-password-fields">
+                        <div class="form-group">
+                            <label for="current-password">Contraseña actual</label>
+                            <input type="password" id="current-password" class="form-input" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label id="new-password-label" for="new-password">Nueva contraseña</label>
+                        <input type="password" id="new-password" class="form-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar nueva contraseña</label>
+                        <input type="password" id="confirm-password" class="form-input" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary close-modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal para widgets -->
+        <div class="modal" id="widget-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Añadir Widget</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="widget-options">
+                    <div class="widget-option" data-widget="weather">
+                        <i class="fas fa-cloud-sun"></i>
+                        <span>Tiempo</span>
+                    </div>
+                    <div class="widget-option" data-widget="rss">
+                        <i class="fas fa-rss"></i>
+                        <span>Noticias RSS</span>
+                    </div>
+                    <div class="widget-option" data-widget="bookmark">
+                        <i class="fas fa-bookmark"></i>
+                        <span>Marcador</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="book" id="book">
             <div class="header">
                 <div class="title-container">
                     <input type="text" class="title" value="Mi Diario Personal" id="diaryTitle">
@@ -25,14 +174,20 @@
                 <div class="tab active" data-tab="calendar">Calendario</div>
                 <div class="tab" data-tab="blogs">Blogs</div>
                 <div class="tab" data-tab="sections">Secciones</div>
+                <div class="tab" data-tab="bookmarks">Marcadores</div>
             </div>
 
             <!-- Contenido del Calendario -->
             <div class="tab-content active" id="calendar-content">
+                <div class="calendar-actions">
+                    <button class="add-event-btn" id="add-event">
+                        <i class="fas fa-plus"></i> Nuevo Evento
+                    </button>
+                </div>
                 <div class="calendar-header">
                     <div class="calendar-title">
                         <span id="current-month-year"></span>
-                        <input type="month" id="month-picker" style="margin-left: 10px; border: none; background: transparent; font-size: inherit; font-family: inherit; color: inherit; cursor: pointer;">
+                        <input type="month" id="month-picker">
                     </div>
                     <div class="calendar-nav">
                         <button id="prev-month"><i class="fas fa-chevron-left"></i></button>
@@ -58,15 +213,6 @@
                     <button class="add-blog-btn" id="add-blog">
                         <i class="fas fa-plus"></i> Nuevo Blog
                     </button>
-                    <div class="import-export-buttons">
-                        <button class="btn-export" id="export-data">
-                            <i class="fas fa-file-export"></i> Exportar
-                        </button>
-                        <button class="btn-import" id="import-data">
-                            <i class="fas fa-file-import"></i> Importar
-                        </button>
-                        <input type="file" id="import-file" accept=".json" style="display: none;">
-                    </div>
                 </div>
                 <div class="blogs-container" id="blogs-container">
                     <!-- Los blogs se agregarán dinámicamente aquí -->
@@ -84,11 +230,48 @@
                     <!-- Las secciones se agregarán dinámicamente aquí -->
                 </div>
             </div>
+
+            <!-- Contenido de Marcadores -->
+            <div class="tab-content" id="bookmarks-content">
+                <div class="bookmarks-actions">
+                    <button class="add-bookmark-btn" id="add-bookmark">
+                        <i class="fas fa-plus"></i> Nuevo Marcador
+                    </button>
+                </div>
+                <div class="bookmarks-container" id="bookmarks-container">
+                    <!-- Los marcadores se agregarán dinámicamente aquí -->
+                </div>
+            </div>
         </div>
 
         <div class="footer">
             <p>Diario Personal &copy; <span id="current-year"></span> - Diseñado con ❤️ por <a href="https://github.com/SircRehnas" target="_blank">thiandev</a></p>
             <p><a href="https://github.com/SircRehnas/DiarioApp_Web" target="_blank">GitHub del proyecto</a></p>
+        </div>
+
+        <!-- Botón flotante para acciones rápidas -->
+        <div class="floating-actions" id="floating-actions">
+            <button class="fab-main" id="fab-main">
+                <i class="fas fa-plus"></i>
+            </button>
+            <div class="fab-options">
+                <button class="fab-option" data-action="blog">
+                    <i class="fas fa-book"></i>
+                    <span class="fab-label">Nuevo Blog</span>
+                </button>
+                <button class="fab-option" data-action="event">
+                    <i class="fas fa-calendar-plus"></i>
+                    <span class="fab-label">Nuevo Evento</span>
+                </button>
+                <button class="fab-option" data-action="postit">
+                    <i class="fas fa-sticky-note"></i>
+                    <span class="fab-label">Nuevo Post-it</span>
+                </button>
+                <button class="fab-option" data-action="bookmark">
+                    <i class="fas fa-bookmark"></i>
+                    <span class="fab-label">Nuevo Marcador</span>
+                </button>
+            </div>
         </div>
     </div>
 
@@ -243,6 +426,35 @@
             </form>
         </div>
     </div>
+
+     <!-- Modal para marcadores -->
+    <div class="modal" id="bookmark-modal"> 
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="bookmark-modal-title">Nuevo Marcador</h3> <!- Título específico para este modal ->
+            <button class="close-modal" data-target="bookmark-modal">&times;</button> <!- Data-target opcional pero útil ->
+        </div>
+        <form id="bookmark-form"> <!- Formulario específico para marcadores ->
+            <input type="hidden" id="bookmark-id"> <!- Input oculto para guardar el ID al editar ->
+            <div class="form-group">
+                <label for="bookmark-title" class="form-label">Título</label>
+                <input type="text" id="bookmark-title" class="form-input" required placeholder="Título del marcador"> <!- Asegúrate que este ID existe ->
+            </div>
+            <div class="form-group">
+                <label for="bookmark-url" class="form-label">URL</label>
+                <input type="url" id="bookmark-url" class="form-input" required placeholder="https://ejemplo.com"> <!- Asegúrate que este ID existe ->
+            </div>
+            <div class="form-group">
+                <label for="bookmark-description" class="form-label">Descripción</label>
+                <textarea id="bookmark-description" class="form-textarea" rows="3" placeholder="Descripción (opcional)"></textarea> <!- Asegúrate que este ID existe ->
+            </div>
+            <div class="modal-footer">
+                 <button type="button" class="btn btn-danger" id="delete-bookmark" style="display: none; margin-right: auto;">Eliminar</button> <button type="button" class="btn btn-secondary close-modal" data-target="bookmark-modal">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
 
     <!-- Botón para añadir post-it -->
     <button class="add-post-it" id="add-post-it">+</button>
